@@ -101,6 +101,20 @@ namespace KazanSession1_25_07.Controllers
             return Json(customView.ToList());
         }
 
+        // POST: Assets/GetUniqueSNs
+        [HttpPost]
+        public ActionResult GetUniqueSNs()
+        {
+            var listSN = new List<string>();
+            listSN = (from x in db.Assets
+                      select x.AssetSN).ToList();
+            listSN.AddRange((from x in db.AssetTransferLogs
+                             select x.FromAssetSN).ToList());
+            listSN.AddRange((from x in db.AssetTransferLogs
+                             select x.ToAssetSN).ToList());
+            return Json(listSN.Distinct());
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

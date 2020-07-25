@@ -23,7 +23,7 @@ namespace KazanSession1_25_07.Controllers
         [HttpPost]
         public ActionResult Index()
         {
-            return View(db.Employees.ToList());
+            return Json(db.Employees.ToList());
         }
 
        
